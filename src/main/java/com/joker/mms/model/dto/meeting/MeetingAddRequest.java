@@ -4,6 +4,7 @@ package com.joker.mms.model.dto.meeting;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class MeetingAddRequest implements Serializable {
@@ -28,12 +29,12 @@ public class MeetingAddRequest implements Serializable {
     /**
      * 会议室状态
      */
-    private Integer  meetingStatus;
+    private  Long  meetingStatus;
 
     /**
      * 附带设备
      */
-    private String  meetingTags;
+    private List<String> meetingTags;
 
     private static final long serialVersionUID = 1L;
 }

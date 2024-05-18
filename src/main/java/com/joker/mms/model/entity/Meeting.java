@@ -12,7 +12,7 @@ public class Meeting implements Serializable {
     /**
      * id
      */
-    @TableId(type = IdType.ASSIGN_ID)
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -46,9 +46,9 @@ public class Meeting implements Serializable {
     private String  meetingHumidity;
 
     /**
-     * 光照强度
+     * 气压
      */
-    private String meetingIllumination;
+    private String meetingPressure;
 
     /**
      * 附带设备

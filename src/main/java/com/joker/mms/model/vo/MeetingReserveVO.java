@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 @Data
@@ -27,27 +28,27 @@ public class MeetingReserveVO implements Serializable {
     /**
      * 会议题目
      */
-    private String theme;
+    private String meetingTheme;
 
     /**
      * 会议内容
      */
-    private String summary;
+    private String meetingSummary;
 
     /**
      * 会议开始时间
      */
-    private Date startTime;
+    private Date meetingStartTime;
 
     /**
      * 会议结束时间
      */
-    private Date endTime;
+    private Date meetingEndTime;
 
     /**
      * 预定状态（0 - 等待中、1 - 预定中、2 - 成功、3 - 失败）
      */
-    private Long status;
+    private Long meetingStatus;
 
     /**
      * 发起人
@@ -62,7 +63,12 @@ public class MeetingReserveVO implements Serializable {
     /**
      * 参会人员
      */
-    private List<String> employeesList;
+    private List<Long> meetingParticipantsList;
+
+    /**
+     * 是否签到
+     */
+    private Map<Long,Boolean> meetingSign;
 
     /**
      * 会议室信息
@@ -86,7 +92,7 @@ public class MeetingReserveVO implements Serializable {
         }
         MeetingReserve meetingReserve = new MeetingReserve();
         BeanUtils.copyProperties(meetingReserveVO, meetingReserve);
-        List<String> employeesList = meetingReserveVO.getEmployeesList();
+        List<Long> employeesList = meetingReserveVO.getMeetingParticipantsList();
         if(employeesList != null){
             meetingReserve.setMeetingParticipants(JSONUtil.toJsonStr(employeesList));
         };
@@ -106,8 +112,8 @@ public class MeetingReserveVO implements Serializable {
         }
         MeetingReserveVO meetingReserveVO = new MeetingReserveVO();
         BeanUtils.copyProperties(meetingReserve, meetingReserveVO);
-        List<String> employeesList = JSONUtil.toList(meetingReserve.getMeetingParticipants(),String.class);
-        meetingReserveVO.setEmployeesList(employeesList);
+        List<Long> employeesList = JSONUtil.toList(meetingReserve.getMeetingParticipants(),Long.class);
+        meetingReserveVO.setMeetingParticipantsList(employeesList);
         return meetingReserveVO;
     }
 

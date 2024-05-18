@@ -17,7 +17,7 @@ public class DepartmentVO implements Serializable {
     /**
      * name
      */
-    private String name;
+    private String departmentName;
 
 
     private static final long serialVersionUID = 1L;

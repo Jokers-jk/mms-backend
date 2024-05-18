@@ -1,39 +1,43 @@
 package com.joker.mms.model.dto.meeting;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class MeetingUpdateRequest implements Serializable {
+
+    /**
+     * id
+     */
+    private Long id;
 
 
     /**
      * name
      */
-    private String name;
+    private String meetingName;
 
     /**
      * 容纳人数
      */
-    private Long capacity;
+    private Long meetingCapacity;
 
     /**
      * 会议室地点
      */
-    private String location;
+    private String meetingLocation;
 
     /**
      * 会议室状态
      */
-    private Integer state;
+    private  Long meetingState;
 
     /**
      * 附带设备
      */
-    private String tags;
+    private List<String> meetingTags;
 
 
     private static final long serialVersionUID = 1L;

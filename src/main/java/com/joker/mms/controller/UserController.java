@@ -9,10 +9,12 @@ import com.joker.mms.common.ResultUtils;
 import com.joker.mms.constant.UserConstant;
 import com.joker.mms.exception.BusinessException;
 import com.joker.mms.exception.ThrowUtils;
+import com.joker.mms.model.dto.team.TeamQueryRequest;
 import com.joker.mms.model.dto.user.*;
 import com.joker.mms.model.entity.User;
 import com.joker.mms.model.vo.LoginUserVO;
 import com.joker.mms.model.vo.UserVO;
+import com.joker.mms.service.TeamService;
 import com.joker.mms.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.List;
 
 import static com.joker.mms.service.impl.UserServiceImpl.SALT;
@@ -36,6 +37,9 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private TeamService teamService;
 
     /**
      * 用户注册
@@ -162,6 +166,12 @@ public class UserController {
         }
         User user = new User();
         BeanUtils.copyProperties(userUpdateRequest, user);
+        if(userUpdateRequest.getTeamId() != null){
+            TeamQueryRequest teamQueryRequest = new TeamQueryRequest();
+            teamQueryRequest.setId(user.getTeamId());
+            Long teamSum = teamService.count(teamService.getQueryWrapper(teamQueryRequest));
+            ThrowUtils.throwIf(teamSum > 0, ErrorCode.REQUEST_ERROR,"团队不存在");
+        }
         boolean result = userService.updateById(user);
         ThrowUtils.throwIf(!result, ErrorCode.SYSTEM_ERROR);
         return ResultUtils.success(true);
@@ -238,11 +248,12 @@ public class UserController {
                 userService.getQueryWrapper(userQueryRequest));
         Page<UserVO> userVOPage = new Page<>(current, size, userPage.getTotal());
         List<UserVO> userVO = userService.getUserVO(userPage.getRecords());
+
         userVOPage.setRecords(userVO);
+
         return ResultUtils.success(userVOPage);
     }
 
-    // endregion
 
     /**
      * 更新个人信息

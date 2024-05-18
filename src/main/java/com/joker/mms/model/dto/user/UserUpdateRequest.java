@@ -42,7 +42,7 @@ public class UserUpdateRequest implements Serializable {
     /**
      * 用户电话
      */
-    private Integer phoneNumber;
+    private Long userPhoneNumber;
 
     /**
      * 用户角色：user/admin/ban
@@ -54,6 +54,12 @@ public class UserUpdateRequest implements Serializable {
      * 出生日期
      */
     private Date birthday;
+
+
+    /**
+     * 所属团队
+     */
+    private Long teamId;
 
 
     /**

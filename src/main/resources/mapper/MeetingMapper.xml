@@ -3,7 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper  namespace="">
+<mapper namespace="com.joker.mms.mapper.MeetingMapper">
+
+    <resultMap id="BaseResultMap" type="com.joker.mms.model.entity.Meeting">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="meetingName" column="meetingName" jdbcType="VARCHAR"/>
+        <result property="meetingCapacity" column="meetingCapacity" jdbcType="BIGINT"/>
+        <result property="meetingLocation" column="meetingLocation" jdbcType="VARCHAR"/>
+        <result property="meetingStatus" column="meetingStatus" jdbcType="TINYINT"/>
+        <result property="meetingTemperature" column="meetingTemperature" jdbcType="VARCHAR"/>
+        <result property="meetingHumidity" column="meetingHumidity" jdbcType="VARCHAR"/>
+        <result property="meetingPressure" column="meetingPressure" jdbcType="VARCHAR"/>
+        <result property="meetingTags" column="meetingTags" jdbcType="VARCHAR"/>
+        <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        id,meetingName,meetingCapacity,meetingLocation,meetingStatus,meetingTemperature,meetingHumidity,meetingPressure,meetingTags,
+        isDelete
+    </sql>
+
 
 
 </mapper>

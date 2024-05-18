@@ -3,7 +3,24 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper  namespace="">
+<mapper namespace="com.joker.mms.mapper.MeetingReserveMapper">
+    <resultMap id="BaseResultMap" type="com.joker.mms.model.entity.MeetingReserve">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="meetingId" column="meetingId" jdbcType="BIGINT"/>
+        <result property="meetingTheme" column="meetingTheme" jdbcType="VARCHAR"/>
+        <result property="meetingSummary" column="meetingLocation" jdbcType="LONGVARCHAR"/>
+        <result property="meetingStartTime" column="meetingStartTime" jdbcType="DATE"/>
+        <result property="meetingEndTime" column="meetingEndTime" jdbcType="DATE"/>
+        <result property="meetingReserveStatus" column="meetingReserveStatus" jdbcType="VARCHAR"/>
+        <result property="userId" column="userId" jdbcType="BIGINT"/>
+        <result property="participateNumber" column="participateNumber" jdbcType="BIGINT"/>
+        <result property="meetingParticipants" column="meetingParticipants" jdbcType="VARCHAR"/>
+        <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
 
+    <sql id="Base_Column_List">
+        id,meetingId,meetingTheme,meetingSummary,meetingStartTime,meetingEmdTime,meetingReserveStatus,userId,participateNumber,meetingParticipants,
+        isDelete
+    </sql>
 
 </mapper>

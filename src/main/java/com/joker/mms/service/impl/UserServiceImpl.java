@@ -4,25 +4,32 @@ package com.joker.mms.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.joker.mms.common.ErrorCode;
 import com.joker.mms.constant.CommonConstant;
 import com.joker.mms.exception.BusinessException;
 import com.joker.mms.mapper.UserMapper;
 import com.joker.mms.model.dto.user.UserQueryRequest;
+import com.joker.mms.model.entity.Department;
+import com.joker.mms.model.entity.Team;
 import com.joker.mms.model.entity.User;
 import com.joker.mms.model.enums.UserRoleEnum;
+import com.joker.mms.model.vo.DepartmentVO;
 import com.joker.mms.model.vo.LoginUserVO;
+import com.joker.mms.model.vo.TeamVO;
 import com.joker.mms.model.vo.UserVO;
+import com.joker.mms.service.DepartmentService;
+import com.joker.mms.service.TeamService;
 import com.joker.mms.service.UserService;
 import com.joker.mms.utils.SqlUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
-import com.joker.mms.common.ErrorCode;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,6 +48,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 盐值，混淆密码
      */
     public static final String SALT = "joker";
+
+    @Resource
+    private DepartmentService departmentService;
+
+    @Resource
+    private TeamService teamService;
 
     @Override
     public long userRegister(String userAccount, String userPassword, String checkPassword) {
@@ -141,6 +154,33 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(user, userVO);
+        Team team = teamService.getById(user.getTeamId());
+        TeamVO teamVO = new TeamVO();
+        BeanUtils.copyProperties(team,teamVO);
+        Department department = departmentService.getById(team.getDepartmentId());
+        DepartmentVO departmentVO = new DepartmentVO();
+        BeanUtils.copyProperties(department,departmentVO);
+        teamVO.setDepartmentVO(departmentVO);
+        userVO.setTeamVO(teamVO);
+        return userVO;
+    }
+
+    @Override
+    public UserVO getUserVO(Long userId) {
+        if (userId == null) {
+            return null;
+        }
+        UserVO userVO = new UserVO();
+        User user = getById(userId);
+        BeanUtils.copyProperties(user, userVO);
+        Team team = teamService.getById(user.getTeamId());
+        TeamVO teamVO = new TeamVO();
+        BeanUtils.copyProperties(team,teamVO);
+        Department department = departmentService.getById(team.getDepartmentId());
+        DepartmentVO departmentVO = new DepartmentVO();
+        BeanUtils.copyProperties(department,departmentVO);
+        teamVO.setDepartmentVO(departmentVO);
+        userVO.setTeamVO(teamVO);
         return userVO;
     }
 
@@ -203,14 +243,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Long id = userQueryRequest.getId();
         String userAccount = userQueryRequest.getUserAccount();
         String userName = userQueryRequest.getUserName();
-        Integer userPhoneNumber = userQueryRequest.getPhoneNumber();
+        Long userPhoneNumber = userQueryRequest.getUserPhoneNumber();
         String userRole = userQueryRequest.getUserRole();
         String sortField = userQueryRequest.getSortField();
         String sortOrder = userQueryRequest.getSortOrder();
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(id != null, "id", id);
         queryWrapper.eq(StringUtils.isNotBlank(userAccount), "userAccount", userAccount);
-        queryWrapper.eq(StringUtils.isNotBlank(userPhoneNumber.toString()), "userPhoneNumber", userPhoneNumber);
+        queryWrapper.eq(ObjectUtils.isNotEmpty(userPhoneNumber), "userPhoneNumber", userPhoneNumber);
         queryWrapper.eq(StringUtils.isNotBlank(userRole), "userRole", userRole);
         queryWrapper.like(StringUtils.isNotBlank(userName), "userName", userName);
         queryWrapper.orderBy(SqlUtils.validSortField(sortField), sortOrder.equals(CommonConstant.SORT_ORDER_ASC),

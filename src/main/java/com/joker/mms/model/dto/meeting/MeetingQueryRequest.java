@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -34,12 +35,12 @@ public class MeetingQueryRequest extends PageRequest implements Serializable {
     /**
      * 会议室状态
      */
-    private Integer  meetingStatus;
+    private Long  meetingStatus;
 
     /**
      * 附带设备
      */
-    private String  meetingTags;
+    private List<String> meetingTags;
 
     private static final long serialVersionUID = 1L;
 }

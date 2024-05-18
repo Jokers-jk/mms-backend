@@ -1,6 +1,7 @@
 package com.joker.mms.model.dto.meetingreserve;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -49,7 +50,7 @@ public class MeetingReserveUpdateRequest implements Serializable {
     /**
      * 参会人员
      */
-    private List<String> meetingParticipants;
+    private List<Long> meetingParticipants;
 
 
     private static final long serialVersionUID = 1L;

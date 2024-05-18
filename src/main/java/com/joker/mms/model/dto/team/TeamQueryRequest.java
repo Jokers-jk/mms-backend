@@ -1,11 +1,14 @@
 package com.joker.mms.model.dto.team;
 
+import com.joker.mms.common.PageRequest;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
 @Data
-public class TeamQueryRequest implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class TeamQueryRequest  extends PageRequest implements Serializable {
 
     /**
      * id
@@ -21,5 +24,7 @@ public class TeamQueryRequest implements Serializable {
      * 所属部门
      */
     private Long departmentId;
+
+
     private static final long serialVersionUID = 1L;
 }

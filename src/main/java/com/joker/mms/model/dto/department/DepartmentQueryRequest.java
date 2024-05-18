@@ -1,12 +1,15 @@
 package com.joker.mms.model.dto.department;
 
+import com.joker.mms.common.PageRequest;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
 
 @Data
-public class DepartmentQueryRequest implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class DepartmentQueryRequest extends PageRequest implements Serializable {
 
     /**
      * id

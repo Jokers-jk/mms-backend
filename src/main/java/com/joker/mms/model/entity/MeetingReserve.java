@@ -1,10 +1,13 @@
 package com.joker.mms.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @TableName(value = "meeting_reserve")
 @Data
@@ -59,6 +62,8 @@ public class MeetingReserve implements Serializable {
      * 参会人员
      */
     private String meetingParticipants;
+
+
 
     /**
      * 是否删除

@@ -27,22 +27,28 @@ public class LoginUserVO implements Serializable {
     /**
      * 用户电话
      */
-    private Integer phoneNumber;
+    private Long userPhoneNumber;
 
     /**
      * 用户角色：user/admin/ban
      */
     private String userRole;
 
-    /**
-     * 所属团队
-     */
-    private Long groupId;
 
     /**
      * 创建时间
      */
     private Date createTime;
+
+    /**
+     * 部门信息
+     */
+    private DepartmentVO departmentVO;
+
+    /**
+     * 团队信息
+     */
+    private TeamVO teamVO;
 
     private static final long serialVersionUID = 1L;
 

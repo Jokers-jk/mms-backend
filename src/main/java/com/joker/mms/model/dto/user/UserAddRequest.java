@@ -25,7 +25,7 @@ public class UserAddRequest implements Serializable {
     /**
      * 用户电话
      */
-    private Integer phoneNumber;
+    private Long userPhoneNumber;
 
     /**
      * 用户角色：user/admin/ban

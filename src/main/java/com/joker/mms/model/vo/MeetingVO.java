@@ -21,27 +21,42 @@ public class MeetingVO implements Serializable {
     /**
      * name
      */
-    private String name;
+    private String meetingName;
 
     /**
      * 容纳人数
      */
-    private Long capacity;
+    private Long meetingCapacity;
 
     /**
      * 会议室地点
      */
-    private String location;
+    private String meetingLocation;
 
     /**
      * 会议室状态
      */
-    private Long state;
+    private Long meetingStatus;
+
+    /**
+     * 温度
+     */
+    private String  meetingTemperature;
+
+    /**
+     * 湿度
+     */
+    private String  meetingHumidity;
+
+    /**
+     * 气压
+     */
+    private String meetingPressure;
 
     /**
      * 附带设备
      */
-    private List<String> tags;
+    private List<String> meetingTags;
 
     /**
      * 包装类转对象
@@ -55,7 +70,7 @@ public class MeetingVO implements Serializable {
         }
         Meeting meeting = new Meeting();
         BeanUtils.copyProperties(meetingVO, meeting);
-        List<String> tagList = meetingVO.getTags();
+        List<String> tagList = meetingVO.getMeetingTags();
         if(tagList != null){
             meeting.setMeetingTags(JSONUtil.toJsonStr(tagList));
         };
@@ -75,7 +90,7 @@ public class MeetingVO implements Serializable {
         MeetingVO meetingVO = new MeetingVO();
         BeanUtils.copyProperties(meeting, meetingVO);
         List<String> tagList = JSONUtil.toList(meeting.getMeetingTags(),String.class);
-        meetingVO.setTags(tagList);
+        meetingVO.setMeetingTags(tagList);
         return meetingVO;
     }
 

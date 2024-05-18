@@ -31,7 +31,7 @@ public class UserVO implements Serializable {
     /**
      * 用户电话
      */
-    private Integer phoneNumber;
+    private Long userPhoneNumber;
 
     /**
      * 用户角色：user/admin/ban
@@ -41,13 +41,11 @@ public class UserVO implements Serializable {
     /**
      * 所属团队
      */
-    private Long groupId;
+    private Long teamId;
 
 
-    private DepartmentVO departmentVO;
 
-
-    private GroupVO groupVO;
+    private TeamVO teamVO;
 
     /**
      * 创建时间

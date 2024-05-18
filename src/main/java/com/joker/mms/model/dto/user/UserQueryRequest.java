@@ -32,13 +32,18 @@ public class UserQueryRequest extends PageRequest implements Serializable {
     /**
      * 用户电话
      */
-    private Integer phoneNumber;
+    private Long userPhoneNumber;
 
 
     /**
      * 用户角色：user/admin/ban
      */
     private String userRole;
+
+    /**
+     * 所属团队
+     */
+    private Long teamId;
 
     private static final long serialVersionUID = 1L;
 }

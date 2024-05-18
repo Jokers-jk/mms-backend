@@ -35,7 +35,7 @@ public class UserUpdateMyRequest implements Serializable {
     /**
      * 用户电话
      */
-    private Integer phoneNumber;
+    private Long userPhoneNumber;
 
 
     /**

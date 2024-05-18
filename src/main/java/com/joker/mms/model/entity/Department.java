@@ -1,13 +1,14 @@
 package com.joker.mms.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.joker.mms.common.PageRequest;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @TableName(value = "department")
 @Data
-public class Department implements Serializable{
+public class Department  implements Serializable{
 
     /**
      * id
